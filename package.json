@@ -1,5 +1,5 @@
 {
-  "name": "ts-survivors",
+  "name": "ts-game",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "phaser": "^3.55.2",
     "typescript": "^4.5.4",
     "vite": "^2.9.9"
   }
