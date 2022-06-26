@@ -1,7 +1,7 @@
 export class Level {
   private scene: Phaser.Scene;
   private platforms: Phaser.Physics.Arcade.StaticGroup;
-  private lastPlatformY: number = 568;
+  private lastPlatformY: number = 800;
   private lastPlatformSide: boolean = false;
 
   constructor(scene: Phaser.Scene) {
@@ -12,7 +12,7 @@ export class Level {
   }
 
   createGround() {
-    this.platforms.create(400, 568, "ground").setScale(2).refreshBody();
+    this.platforms.create(400, 800, "ground").setScale(2).refreshBody();
   }
 
   public getPlatforms(): Phaser.Physics.Arcade.StaticGroup {
@@ -31,7 +31,7 @@ export class Level {
     const newPlatformY = this.lastPlatformY - 180;
     const newPlatformSide = !this.lastPlatformSide;
 
-    this.platforms.create(newPlatformSide ? 700 : 100, newPlatformY, "ground");
+    this.platforms.create(newPlatformSide ? 600 : 10, newPlatformY, "ground");
 
     this.lastPlatformY = newPlatformY;
     this.lastPlatformSide = newPlatformSide;

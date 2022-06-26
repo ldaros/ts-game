@@ -19,23 +19,36 @@ export default class Game extends Phaser.Scene {
 
   create() {
     this.level = new Level(this);
-    this.player = new PlayableCharacter(this, 100, 450);
+    this.player = new PlayableCharacter(this, 100, 700);
 
     this.physics.add.collider(this.player, this.level.getPlatforms());
 
+    this.level.generateNewPlatforms();
     this.level.generateNewPlatforms();
     this.level.generateNewPlatforms();
   }
 
   update() {
     this.player.update();
+    this.player.renderJumpBar();
     this.buildLevel();
-    this.scrollCamera();
     this.updateBuffer();
+
+    this.killPlayer();
+
+    this.updateCamera(this.player.y);
   }
 
-  private scrollCamera() {
-    this.cameras.main.scrollY -= 0.4;
+  killPlayer() {
+    if (this.player.y > this.level.getHeight()) {
+      this.scene.restart();
+    }
+  }
+
+  private updateCamera(playerY: number) {
+    if (playerY - 300 < this.cameras.main.scrollY) {
+      this.cameras.main.scrollY -= 1;
+    }
   }
 
   private buildLevel() {
@@ -57,8 +70,8 @@ export default class Game extends Phaser.Scene {
 const config = {
   type: Phaser.AUTO,
   backgroundColor: "#b0dbf1",
-  width: 800,
-  height: 600,
+  width: 600,
+  height: 800,
   physics: {
     default: "arcade",
     arcade: {
